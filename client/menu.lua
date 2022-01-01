@@ -593,13 +593,8 @@ Citizen.CreateThread(function()
                 end
             end
         end)
-
-
     end)
-
-
     end
-
 end)
 
 
@@ -627,6 +622,5 @@ Citizen.CreateThread(function()
     end
 end)
 
------------------visual setting  https://forum.cfx.re/t/release-serverside-visualsettings-stream-custom-visualsettings-dat/201448 -------------
 
 
