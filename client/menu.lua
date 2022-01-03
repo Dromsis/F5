@@ -124,18 +124,13 @@ function Ragdoll()
   TriggerEvent("Ragdoll", source)
 end
 
-
 ---------------------------------------
 
-local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
-local playerPed = PlayerPedId()
-
-
+local closestPlayer, closestPlayerDistance = nil,nil
+local playerPed = nil
 menu = {
     billing = {}
-    
 }
-
 local name = {}
 local closestDistance
 local closestPlayer
@@ -144,19 +139,20 @@ local IsInVeh = false
 local locked
 local playervh 
 local plaque
+local playercard = nil
 
 ----------------------------------------------------------
 
-RMenu.Add("civile", "main", RageUI.CreateMenu("MenuF5","Menu personnel", 15 , 10,"banner","Banner"))
-RMenu.Add('civile', 'porte', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Mon portefeuille"))
-RMenu.Add('civile', 'pp', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Mes papiers"))
-RMenu.Add('civile', 'vh', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Véhicule"))
-RMenu.Add('civile', 'facture', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Mes factures non payées"))
-RMenu.Add('civile', 'job', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Administration"))
-RMenu.Add('civile', 'job2', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Administration"))
-RMenu.Add('civile', 'inter', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Interactions"))
-RMenu.Add('civile', 'extra', RageUI.CreateSubMenu(RMenu:Get('civile', 'vh'), "MenuF5", "Menu extra"))
-RMenu.Add('civile', 'rockstar', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Enregistrement Rockstart-Editor"))
+RMenu.Add("civile", "main", RageUI.CreateMenu("Paris93","Menu personnel", 15 , 10,"banner","Banner"))
+RMenu.Add('civile', 'porte', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Mon portefeuille"))
+RMenu.Add('civile', 'pp', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Mes papiers"))
+RMenu.Add('civile', 'vh', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Véhicule"))
+RMenu.Add('civile', 'facture', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Mes factures non payées"))
+RMenu.Add('civile', 'job', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Administration"))
+RMenu.Add('civile', 'job2', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Administration"))
+RMenu.Add('civile', 'inter', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Interactions"))
+RMenu.Add('civile', 'extra', RageUI.CreateSubMenu(RMenu:Get('civile', 'vh'), "Paris93", "Menu extra"))
+RMenu.Add('civile', 'rockstar', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Enregistrement Rockstart-Editor"))
 RMenu:Get('civile', 'main').EnableMouse = false
 RMenu:Get('civile', 'main').Closed = function()end
 
@@ -260,16 +256,13 @@ Citizen.CreateThread(function()
                 end
             end)
         end
-
-        
-       
     end)
 
     RageUI.IsVisible(RMenu:Get("civile","job"),true,true,true,function()
 
         RageUI.Separator("Entreprise/Service: ~b~"..ESX.PlayerData.job.label .."~s~")
-					
-	RageUI.Separator("Salaire: ~b~"..ESX.PlayerData.job.grade_salary .."€~s~")			
+
+        RageUI.Separator("Salaire: ~b~"..ESX.PlayerData.job.grade_salary .."€~s~")
 
         RageUI.Separator("~s~"..ESX.PlayerData.job.grade_label .."~s~")
 
@@ -308,8 +301,8 @@ Citizen.CreateThread(function()
     RageUI.IsVisible(RMenu:Get("civile","job2"),true,true,true,function()
         
         RageUI.Separator("Entreprise/Organisation: ~b~"..ESX.PlayerData.job2.label .."~s~")
-					
-	RageUI.Separator("Salaire: ~b~"..ESX.PlayerData.job2.grade_salary .."€~s~")
+
+        RageUI.Separator("Salaire: ~b~"..ESX.PlayerData.job2.grade_salary .."€~s~")
 
         RageUI.Separator("~s~"..ESX.PlayerData.job2.grade_label .."~s~")
 
@@ -371,11 +364,7 @@ Citizen.CreateThread(function()
             RageUI.ButtonWithStyle("Mes factures", nil, {RightLabel = "→→→"},true, function()
             end, RMenu:Get('civile', 'facture'))
         end
-
-            
         
-
-
     end)
 
     RageUI.IsVisible(RMenu:Get('civile', 'facture'), true, true, true, function()
@@ -558,7 +547,6 @@ Citizen.CreateThread(function()
 
         RageUI.Separator("~s~"..GetPlayerName(PlayerId()).."~s~")
 
-
         RageUI.ButtonWithStyle("~b~Voir~s~ sa carte d'identité",nil, {RightLabel = nil}, true, function(Hovered, Active, Selected)
             if Selected then
                 TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(PlayerId()))
@@ -566,14 +554,13 @@ Citizen.CreateThread(function()
             end
         end)
 
-        
         RageUI.ButtonWithStyle("~r~Présenter~s~ sa carte d'identité",nil, {RightLabel = nil}, true, function(Hovered, Active, Selected)
             if Selected then
-                if closestPlayer ~= -1 and closestDistance <= 3.0 then
+                if closestPlayer == -1 or closestPlayerDistance < 3.0 then
                     TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(closestPlayer))
                     RageUI.CloseAll()
                 else
-                    ESX.ShowNotification('Personne autoure')
+                    ESX.ShowNotification('Personne autour')
                 end
             end
         end)
@@ -589,16 +576,21 @@ Citizen.CreateThread(function()
         
         RageUI.ButtonWithStyle("~r~Présenter~s~ son permis de conduire",nil, {RightLabel = nil}, true, function(Hovered, Active, Selected)
             if Selected then
-                if closestPlayer ~= -1 and closestDistance <= 3.0 then
+                if closestPlayer == -1 or closestPlayerDistance < 3.0 then
                     TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(closestPlayer), 'driver')
                     RageUI.CloseAll()
                 else
-                    ESX.ShowNotification('Personne autoure')
+                    ESX.ShowNotification('Personne autour')
                 end
             end
         end)
+
+
     end)
+
+
     end
+
 end)
 
 
@@ -616,13 +608,13 @@ end)
 Citizen.CreateThread(function()
     while true do 
         Citizen.Wait(750)
-        closestPlayer = ESX.Game.GetClosestPlayer()
-        closestDistance = ESX.Game.GetClosestPlayer()
+        closestPlayer, closestPlayerDistance = ESX.Game.GetClosestPlayer()
         playerPed = PlayerPedId()
         IsInVeh = IsPedSittingInAnyVehicle(playerPed)
         locked = GetVehicleDoorLockStatus(playervh)
         playervh = GetVehiclePedIsIn(playerPed, false)
         plaque = GetVehicleNumberPlateText(playervh)
+        playerCoords = GetEntityCoords(playerPed, true)
     end
 end)
 
