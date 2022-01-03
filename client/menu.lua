@@ -268,6 +268,8 @@ Citizen.CreateThread(function()
     RageUI.IsVisible(RMenu:Get("civile","job"),true,true,true,function()
 
         RageUI.Separator("Entreprise/Service: ~b~"..ESX.PlayerData.job.label .."~s~")
+					
+	RageUI.Separator("Salaire: ~b~"..ESX.PlayerData.job.grade_salary .."€~s~")			
 
         RageUI.Separator("~s~"..ESX.PlayerData.job.grade_label .."~s~")
 
@@ -306,6 +308,8 @@ Citizen.CreateThread(function()
     RageUI.IsVisible(RMenu:Get("civile","job2"),true,true,true,function()
         
         RageUI.Separator("Entreprise/Organisation: ~b~"..ESX.PlayerData.job2.label .."~s~")
+					
+	RageUI.Separator("Salaire: ~b~"..ESX.PlayerData.job2.grade_salary .."€~s~")
 
         RageUI.Separator("~s~"..ESX.PlayerData.job2.grade_label .."~s~")
 
