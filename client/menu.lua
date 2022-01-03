@@ -147,16 +147,16 @@ local plaque
 
 ----------------------------------------------------------
 
-RMenu.Add("civile", "main", RageUI.CreateMenu("Paris93","Menu personnel", 15 , 10,"banner","Banner"))
-RMenu.Add('civile', 'porte', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Mon portefeuille"))
-RMenu.Add('civile', 'pp', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Mes papiers"))
-RMenu.Add('civile', 'vh', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Véhicule"))
-RMenu.Add('civile', 'facture', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Mes factures non payées"))
-RMenu.Add('civile', 'job', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Administration"))
-RMenu.Add('civile', 'job2', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Administration"))
-RMenu.Add('civile', 'inter', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Interactions"))
-RMenu.Add('civile', 'extra', RageUI.CreateSubMenu(RMenu:Get('civile', 'vh'), "Paris93", "Menu extra"))
-RMenu.Add('civile', 'rockstar', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "Paris93", "Enregistrement Rockstart-Editor"))
+RMenu.Add("civile", "main", RageUI.CreateMenu("MenuF5","Menu personnel", 15 , 10,"banner","Banner"))
+RMenu.Add('civile', 'porte', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Mon portefeuille"))
+RMenu.Add('civile', 'pp', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Mes papiers"))
+RMenu.Add('civile', 'vh', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Véhicule"))
+RMenu.Add('civile', 'facture', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Mes factures non payées"))
+RMenu.Add('civile', 'job', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Administration"))
+RMenu.Add('civile', 'job2', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Administration"))
+RMenu.Add('civile', 'inter', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Interactions"))
+RMenu.Add('civile', 'extra', RageUI.CreateSubMenu(RMenu:Get('civile', 'vh'), "MenuF5", "Menu extra"))
+RMenu.Add('civile', 'rockstar', RageUI.CreateSubMenu(RMenu:Get('civile', 'main'), "MenuF5", "Enregistrement Rockstart-Editor"))
 RMenu:Get('civile', 'main').EnableMouse = false
 RMenu:Get('civile', 'main').Closed = function()end
 
