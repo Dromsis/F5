@@ -20,6 +20,7 @@ Citizen.CreateThread(function()
     end
 end)
 
+local test = 1
 
 loadDict = function(dict)
     while not HasAnimDictLoaded(dict) do Wait(0) RequestAnimDict(dict) end
